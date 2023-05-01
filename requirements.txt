@@ -2,7 +2,7 @@ certifi==2022.6.15
 charset-normalizer==2.1.1
 colour==0.1.5
 cycler==0.11.0
-easyocr==1.6.0
+easyocr==1.6.2
 fonttools==4.37.1
 idna==3.3
 imageio==2.21.1

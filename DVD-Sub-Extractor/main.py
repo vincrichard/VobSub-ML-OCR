@@ -1,9 +1,12 @@
 from pathlib import Path
 from matplotlib import image
-
-from vob_sub_parser import VobSubParser
+import numpy as np
 import easyocr
 from tqdm import tqdm
+from skimage.transform import resize
+from skimage.color import rgb2gray
+
+from vob_sub_parser import VobSubParser
 
 
 def initialize_sub_idx(vob_sub_file_name: Path):
@@ -23,7 +26,14 @@ def initialize_sub_idx(vob_sub_file_name: Path):
             image_path = folder_path / f'{i + 1}.png'
             pack.palette = _palette
             img = pack.get_bitmap()
-            image.imsave(image_path, (img * 255).astype('uint8'))
+            img = (img * 255).astype('uint8')
+            # img = rgb2gray(img)
+            h, w, c = img.shape
+            # img = resize(img, (h*2, w*2))
+            img = np.pad(img, ((int(h/2), int(h/2)), (int(w/10), int(w/10)), (0,0)))
+            # image.imsave(image_path, img, cmap="Greys")
+            # image.imsave(image_path, np.dot((img * 255).astype('uint8')[..., :3], [0.2989, 0.5870, 0.1140]), cmap="Greys")
+            image.imsave(image_path, img)
             with open(f'{name}.srt', 'a') as file:
                 file.write(f'{i + 1}\n')
                 file.write(f'{pack.start_time.get_str_format()} --> {pack.end_time.get_str_format()}\n')
@@ -37,14 +47,12 @@ def initialize_sub_idx(vob_sub_file_name: Path):
     for path in tqdm(list(folder_path.iterdir())):
         result = reader.readtext(str(path), paragraph=True)
         result = ' '.join([r[-1] for r in result])
-        a = 0
 
         srt_file = srt_file.replace(str(path), result)
-    a = 0
     with open(f'{name}.srt', 'w') as file:
         file.write(srt_file)
 
 
 if __name__ == "__main__":
-    initialize_sub_idx(Path("/media/vincent/C0FC3B20FC3B0FE0/Film/Hanabi/sub_hanabi.sub"))
-    # initialize_sub_idx(Path("/media/vincent/C0FC3B20FC3B0FE0/Film/Godzilla/sub_godzila.sub"))
+    initialize_sub_idx(Path("/media/vincent/C0FC3B20FC3B0FE0/Film/Hanabi/hanabi.sub"))
+    # initialize_sub_idx(Path("/media/vincent/C0FC3B20FC3B0FE0/Film/Godzilla/test_2_godz.sub"))
