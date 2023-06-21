@@ -4,8 +4,8 @@ from datetime import datetime
 from typing import List
 import re
 
-from custom_color import CustomColor as Color
-from utils import custom_timedelta as timedelta
+from .custom_color import CustomColor as Color
+from .utils import custom_timedelta as timedelta
 
 
 @dataclass

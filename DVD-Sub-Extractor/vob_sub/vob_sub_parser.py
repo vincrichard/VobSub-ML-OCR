@@ -1,15 +1,14 @@
 
 import os
 from typing import List
-from config import Config
 
-from vob_sub_pack import VobSubPack
-from idx import Idx
-from idx import IdxParagraph
-from vob_sub_merge_pack import VobSubMergedPack
-from utils import custom_timedelta
-
-from utils import is_subtitle_pack, is_private_stream1
+from .config import SettingsArgs
+from .vob_sub_pack import VobSubPack
+from .idx import Idx
+from .idx import IdxParagraph
+from .vob_sub_merge_pack import VobSubMergedPack
+from .utils import custom_timedelta
+from .utils import is_subtitle_pack, is_private_stream1
 
 PES_MAX_LENGTH = 2028
 
@@ -18,7 +17,7 @@ class VobSubParser:
     def __init__(self, is_pal: bool):
         self.is_pal = is_pal
         self.vob_sub_packs: list[VobSubPack] = []
-        self.cfg = Config({})
+        self.settings = SettingsArgs()
 
     def open_file(self, filename: str) -> None:
         with open(filename, mode='rb') as file:
@@ -160,20 +159,20 @@ class VobSubParser:
 
             if pack.end_time < pack.start_time \
                 or pack.end_time.total_milliseconds() - pack.start_time.total_milliseconds() \
-                    > self.cfg.settings.general.subtitle_maximum_display_milliseconds:
+                    > self.settings.general.subtitle_maximum_display_milliseconds:
 
                 if i + 1 < len(list_vob_sub_merge_pack):
 
                     pack.end_time = custom_timedelta(
                         milliseconds=list_vob_sub_merge_pack[i + 1].start_time.total_milliseconds() \
-                        - self.cfg.settings.general.minimum_milliseconds_between_lines
+                        - self.settings.general.minimum_milliseconds_between_lines
                     )
 
                     if pack.end_time.total_milliseconds() - pack.start_time.total_milliseconds() \
-                        > self.cfg.settings.general.subtitle_maximum_display_milliseconds:
+                        > self.settings.general.subtitle_maximum_display_milliseconds:
 
                         pack.end_time = custom_timedelta(milliseconds=pack.start_time.total_milliseconds() \
-                            + self.cfg.settings.general.subtitle_maximum_display_milliseconds
+                            + self.settings.general.subtitle_maximum_display_milliseconds
                         )
                     else:
                         pack.end_time = custom_timedelta(milliseconds=pack.start_time.total_milliseconds() + 3000)

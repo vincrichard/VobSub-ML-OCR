@@ -3,9 +3,9 @@ from enum import Enum
 from typing import List
 import numpy as np
 
-from utils import get_endian_word, Rectangle
-from utils import custom_timedelta as timedelta
-from custom_color import CustomColor as Color
+from .utils import get_endian_word, Rectangle
+from .utils import custom_timedelta as timedelta
+from .custom_color import CustomColor as Color
 
 class SubPicture:
 # Subtitle Picture - see http:#www.mpucoder.com/DVD/spu.html for more info

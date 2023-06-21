@@ -1,0 +1,6 @@
+tqdm==4.65.0
+matplotlib==3.7.1
+colour==0.1.5
+#prediction dependencies
+manga-ocr==0.1.10
+easyocr==1.7.0

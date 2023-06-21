@@ -1,7 +1,7 @@
-from idx import IdxParagraph
-from packetized_elementary_strem import PacketizedElementaryStream
 
-from utils import is_mpeg2_pack_header, is_private_stream1, Mpeg2Header
+from .idx import IdxParagraph
+from .packetized_elementary_strem import PacketizedElementaryStream
+from .utils import is_mpeg2_pack_header, is_private_stream1, Mpeg2Header
 
 class VobSubPack:
         packetized_elementary_stream: PacketizedElementaryStream

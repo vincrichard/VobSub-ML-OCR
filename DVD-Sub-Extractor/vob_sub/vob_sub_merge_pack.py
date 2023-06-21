@@ -1,11 +1,12 @@
 
 from typing import Tuple
-from idx import IdxParagraph
-from sub_picture import SubPicture
-from utils import timedelta as timedelta
+
 import numpy as np
 
-from custom_color import CustomColor as Color
+from .idx import IdxParagraph
+from .sub_picture import SubPicture
+from .utils import timedelta as timedelta
+from .custom_color import CustomColor as Color
 
 class VobSubMergedPack: #IBinaryParagraphWithPosition
     def __init__(self, sub_picture_data: bytearray, presentation_time_stamp: timedelta, stream_id: int, idx_line: IdxParagraph):

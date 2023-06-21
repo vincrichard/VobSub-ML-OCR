@@ -1,4 +1,4 @@
-from utils import get_endian, get_endian_word, Mpeg2Header
+from .utils import get_endian, get_endian_word, Mpeg2Header
 
 # http://www.mpucoder.com/DVD/pes-hdr.html
 class PacketizedElementaryStream:
