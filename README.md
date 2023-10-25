@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/vincrichard/VobSub-ML-OCR/main/fig/logo.png" alt="logo" width="600px" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/vincrichard/VobSub-ML-OCR/main/fig/logo.png" alt="logo" width="300px" /></p>
 
 ----
 # VobSub Image Extractor and OCR
