@@ -73,8 +73,6 @@ The arguments are:
 * `-l` or `--language`: The language(s) of the subtitles. If 'ja', MangaOcr model will be used. If 'other', easyocr.Reader will be used. Can be a list of languages. Default is 'ja'.
 * `-j` or `--jobs`: Number of jobs to run in parallel for image extraction. Only applies in 'extract' and 'both' modes. Default is 1.
 
-Remember to replace `script.py` with the actual name of your Python script.
-
 
 ### Extract .sub/.idx Files using `mkvmerge` and `mkvextract`
 
