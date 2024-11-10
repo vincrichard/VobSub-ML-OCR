@@ -16,8 +16,11 @@ class CustomColor(Color):
                 return getattr(self, 'get_' + label)()
             except AttributeError:
                 raise AttributeError("'%s' not found" % label)
-        except:
-            return self.__dict__[label]
+        except Exception:
+            try:
+                return self.__dict__[label]
+            except (KeyError, RecursionError):
+                raise AttributeError(name)
 
     def __setattr__(self, label, value):
         try:
@@ -26,5 +29,8 @@ class CustomColor(Color):
                 fc(value)
             else:
                 self.__dict__[label] = value
-        except:
-            self.__dict__[label] = value
+        except Exception:
+            try:
+                self.__dict__[label] = value
+            except (KeyError, RecursionError):
+                raise AttributeError(name)
