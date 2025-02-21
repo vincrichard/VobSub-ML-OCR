@@ -10,7 +10,7 @@ def create_generate_sub_images(vob_sub_file_name: Path, folder_imgs: Path, n_job
     subfile, image_paths = extract_vob_sub_img(vob_sub_file_name, folder_imgs, n_jobs)
     srt_filepath = vob_sub_file_name.with_suffix('.srt')
 
-    with open(srt_filepath, 'w') as file:
+    with open(srt_filepath, 'w', encoding="utf-8") as file:
         file.write(subfile)
 
     return image_paths
@@ -38,7 +38,7 @@ def predict_text_on_sub_images(vob_sub_file_name: Path, image_paths:List[Path], 
 
         subfile = subfile.replace(str(path), predicted_text)
 
-    with open(srt_filepath, 'w') as file:
+    with open(srt_filepath, 'w', encoding="utf-8") as file:
         file.write(subfile)
 
 
